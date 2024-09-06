@@ -1,10 +1,10 @@
 'use client'
 
-import React, {createContext, ReactNode, useState} from 'react';
+import React, {createContext, ReactNode, useEffect, useState} from 'react';
 
 type HomeContextData = {
-    contador: number;
-    incremento: () => void;
+    playing: boolean;
+    configPlayPause: () => void;
 }
 
 export const HomeContext = createContext({} as HomeContextData);
@@ -14,17 +14,39 @@ type ProviderProps = {
 }
 
 const HomeContextProvider = ({children}:ProviderProps) => {
-    const [contador, setContador] = useState(0);
+    const [playing, setPlaying] = useState(false);
+    const [audio, setAudio] = useState<HTMLAudioElement>();
 
-    const incremento = () => {
-       setContador(contador + 1);
+    useEffect(()=>{
+        const newAudio = new Audio("audios/audio1.mp3");
+        setAudio(newAudio);
+    }, []);
+
+    const configPlayPause = () => {
+        if (playing) {
+            pause();
+        }
+        else {
+            play();
+        }
+        setPlaying(!playing);
+    }
+
+    const play = ()=> {
+        if (!audio) return;
+        audio.play();
+    }
+
+    const pause = () => {
+        if (!audio) return;
+        audio.pause();
     }
 
     return (
         <HomeContext.Provider value={
             {
-                contador,
-                incremento
+                playing,
+                configPlayPause
             }
         }>
           {children} 

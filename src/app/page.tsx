@@ -1,41 +1,38 @@
 'use client'
 
 import { useContext } from "react";
-import {FaPlusCircle, FaMinusCircle} from 'react-icons/fa';
+import {FaPlusCircle, FaMinusCircle, FaPlay, FaPause} from 'react-icons/fa';
 import { HomeContext } from "./context/HomeContext";
+import {musics} from "./dados/music";
 
 export default function Home() {
   const {
-     contador,
-     incremento
+     playing,
+     configPlayPause
   } = useContext(HomeContext);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-       <h1>{contador}</h1>
+       <h1>{playing}</h1>
        <div className="flex flex-row">
-       <button onClick={()=> incremento()}>
+       <button onClick={()=> configPlayPause()}>
            {
-            (contador === 0) ? 
-             (<FaPlusCircle className="text-[50px] text-[tomato]" />) : 
-             (<FaMinusCircle />)
+            (playing) ? 
+             (<FaPause className="text-[50px] text-[tomato]" />) : 
+             (<FaPlay />)
            }
-
-       </button>
-       <button onClick={()=> incremento()}>
-           {
-            (contador === 0) ? 
-             (<FaPlusCircle className="text-[50px] text-[tomato]" />) : 
-             (<FaMinusCircle />)
-           }
-
-       </button>
-       <button onClick={()=> incremento()}>
-           {
-            (contador === 0) ? 
-             (<FaPlusCircle className="text-[50px] text-[tomato]" />) : 
-             (<FaMinusCircle />)
-           }
-
+           <div>
+              {
+                musics.map(music => {
+                  return (
+                    <div>
+                      <h1>
+                          {music.author}
+                      </h1>
+                    </div>
+                  )
+                })
+              }
+           </div>
        </button>
        </div>
     </main>
