@@ -26,6 +26,38 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+@layer base {
+  body {
+    @apply bg-gray-900 text-gray-100; /* Define o fundo escuro e o texto claro */
+  }
+}
+
+@layer components {
+  aside {
+    @apply bg-gray-800; /* Fundo lateral escuro */
+  }
+
+  button {
+    @apply bg-transparent border-none cursor-pointer; /* Estilo do botão */
+  }
+
+  button:hover {
+    @apply opacity-80; /* Opacidade do botão ao passar o mouse */
+  }
+
+  h1, h2, h3, p {
+    @apply text-white; /* Texto branco */
+  }
+
+  a {
+    @apply text-green-500; /* Cor do link */
+  }
+
+  a:hover {
+    @apply underline; /* Sublinhado do link ao passar o mouse */
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
